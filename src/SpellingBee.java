@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Scanner;
-
+//Yasin Abdulkariem
 /**
  * Spelling Bee
  *
@@ -23,7 +23,7 @@ import java.util.Scanner;
  * It utilizes recursion to generate the strings, mergesort to sort them, and
  * binary search to find them in a dictionary.
  *
- * @author Zach Blick, [ADD YOUR NAME HERE]
+ * @author Yasin Abdulkariem
  *
  * Written on March 5, 2023 for CS2 @ Menlo School
  *
