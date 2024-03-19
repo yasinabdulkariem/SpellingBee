@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.Scanner;
 
 /**
@@ -43,14 +44,56 @@ public class SpellingBee {
     // TODO: generate all possible substrings and permutations of the letters.
     //  Store them all in the ArrayList words. Do this by calling ANOTHER method
     //  that will find the substrings recursively.
-    public void generate() {
-        // YOUR CODE HERE — Call your recursive method!
+    public void generate(){
+        generateWord("", letters);
     }
+    public void generateWord(String current, String remaining){
+        if (remaining.isEmpty()){
+            words.add(current);
+            return;
+        }
 
+        for(int i = 0; i < remaining.length(); i++){
+            generateWord(current + remaining.charAt(i), remaining.substring(0, i) + remaining.substring(i + 1));
+        }
+    }
     // TODO: Apply mergesort to sort all words. Do this by calling ANOTHER method
     //  that will find the substrings recursively.
     public void sort() {
         // YOUR CODE HERE
+        mergeSort(words, 0, words.size() - 1);
+    }
+    public ArrayList<String> mergeSort(ArrayList<String> arr, int low, int high){
+        if(high - low == 0){
+            ArrayList<String> newArr = new ArrayList<>(1);
+            newArr.add(arr.get(low));
+            return newArr;
+        }
+        int med = (high + low) / 2;
+        ArrayList<String> arr1 = mergeSort(arr, low, med);
+        ArrayList<String> arr2 = mergeSort(arr, med + 1, high);
+        return merge(arr1, arr2);
+    }
+    public ArrayList<String> merge(ArrayList<String> arr1, ArrayList<String> arr2){
+        ArrayList<String> sol = new ArrayList<>(arr1.size() + arr2.size());
+        int index1 = 0, index2 = 0;
+
+        while(index1 < arr1.size() && index2 < arr2.size()){
+            if(arr1(index1) < arr2(index2)){
+                sol.add()
+            }
+            else{
+                sol.add()
+            }
+        }
+        while(index1 < arr1.size()){
+            sol.add()
+        }
+        while(index2 < arr2.size()){
+            sol.add()
+        }
+        return sol;
+
     }
 
     // Removes duplicates from the sorted list.
@@ -69,6 +112,33 @@ public class SpellingBee {
     //  If it is not in the dictionary, remove it from words.
     public void checkWords() {
         // YOUR CODE HERE
+
+        for(int i = 0; i < words.size(); i++){
+            if(!found(words.get(i))){
+                words.remove(i);
+            }
+        }
+    }
+
+    public boolean found(String word) {
+        int low = 0;
+        int high = DICTIONARY_SIZE - 1;
+
+        while (low < high) {
+            int middle = (high + low) / 2;
+            int comp = DICTIONARY[middle].compareTo(word);
+
+            if(comp < 0){
+                low = middle + 1;
+            }
+            else if(comp > 0){
+                high = middle + 1;
+            }
+            else{
+                return true;
+            }
+        }
+        return false;
     }
 
     // Prints all valid words to wordList.txt
