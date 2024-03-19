@@ -54,6 +54,7 @@ public class SpellingBee {
         }
 
         for(int i = 0; i < remaining.length(); i++){
+            words.add(current + remaining.charAt(i));
             generateWord(current + remaining.charAt(i), remaining.substring(0, i) + remaining.substring(i + 1));
         }
     }
@@ -61,7 +62,7 @@ public class SpellingBee {
     //  that will find the substrings recursively.
     public void sort() {
         // YOUR CODE HERE
-        mergeSort(words, 0, words.size() - 1);
+        words = mergeSort(words, 0, words.size() - 1);
     }
     public ArrayList<String> mergeSort(ArrayList<String> arr, int low, int high){
         if(high - low == 0){
@@ -79,21 +80,20 @@ public class SpellingBee {
         int index1 = 0, index2 = 0;
 
         while(index1 < arr1.size() && index2 < arr2.size()){
-            if(arr1(index1) < arr2(index2)){
-                sol.add()
+            if(arr1.get(index1).compareTo(arr2.get(index2)) <= 0){
+                sol.add(arr1.get(index1++));
             }
             else{
-                sol.add()
+                sol.add(arr2.get(index2++));
             }
         }
         while(index1 < arr1.size()){
-            sol.add()
+            sol.add(arr1.get(index1++));
         }
         while(index2 < arr2.size()){
-            sol.add()
+            sol.add(arr2.get(index2++));
         }
         return sol;
-
     }
 
     // Removes duplicates from the sorted list.
@@ -124,7 +124,7 @@ public class SpellingBee {
         int low = 0;
         int high = DICTIONARY_SIZE - 1;
 
-        while (low < high) {
+        while (low <= high) {
             int middle = (high + low) / 2;
             int comp = DICTIONARY[middle].compareTo(word);
 
@@ -132,7 +132,7 @@ public class SpellingBee {
                 low = middle + 1;
             }
             else if(comp > 0){
-                high = middle + 1;
+                high = middle - 1;
             }
             else{
                 return true;
